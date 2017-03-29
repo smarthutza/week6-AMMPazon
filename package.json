@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-  "url": "git+https://github.com/smarthutza/week6-AMMPazon.git"
+    "url": "git+https://github.com/smarthutza/week6-AMMPazon.git"
   },
   "keywords": [
     "store",
@@ -32,6 +32,7 @@
     "tape": "^4.6.3"
   },
   "dependencies": {
+    "env2": "^2.1.1",
     "pg": "^6.1.5"
   }
 }
