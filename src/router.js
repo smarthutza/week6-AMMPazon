@@ -8,6 +8,10 @@ const router = (req, res) => {
 
     handlers.serveLanding(req, res);
 
+  } else if (endpoint.indexOf('/assets') === 0) {
+
+    handlers.serveAssets(req, res);
+
   } else if (endpoint === '/bestsellers') {
 
     handlers.serveBestsellers(req, res);
