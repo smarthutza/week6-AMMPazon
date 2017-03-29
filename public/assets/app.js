@@ -8,16 +8,16 @@ function chgAction() {
 
     switch (form.recipient.selectedIndex) {
         case 1:
-            form.action = "/best";
+            form.action = "/bestsellers";
             break;
         case 2:
-            form.action = "/salesq=01/01/2017";
+            form.action = "/sales?q=01/01/2017";
             break;
         case 3:
-            form.action = "/salesq=all";
+            form.action = "/sales?q=all";
             break;
         case 3:
-            form.action = "/custval";
+            form.action = "/topcustomers";
             break;
 
     }
