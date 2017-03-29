@@ -10,25 +10,25 @@
 <body>
   <h2> Please choose the type of information you would like to retrieve: </h2>
 
-  <form id="form" name="form" action="/" method="post">
+   <form id="FORM_ID" action="/">
 
-  <select name="recipient" id="recipient" size="1" onChange="chgAction()">
+   <select name="recipient" id="selection" method="POST" onChange="chgAction()">
 
-    <option value="best-sellers">Best Sellers</option>
-    <option value="year-sales">Current Year Sales</option>
-    <option value="all-sales">All Sales</option>
-    <option value="top-customers">Top Customers</option>
-    
-  </select>
 
-    <button type="button" name="button">Get info</button>
+     <option value="">Please select</option>
+     <option value="best">Best Sellers</option>
+     <option value="salesq=01/01/2017">Current Year Sales</option>
+     <option value="salesq=all">All Sales</option>
+     <option value="topcust">Top Customers</option>
 
-  </form>
+   </select>
 
-  <div class="results">
-  </div>
+   </form>
 
-<script type="text/javascript" src="./assets/app.js"> </script>
+   <div class="results">
+   </div>
+
+ <script type="text/javascript" src="./assets/app.js"> </script>
 
 </body>
 </html>
