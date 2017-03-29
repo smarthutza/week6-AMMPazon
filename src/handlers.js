@@ -6,7 +6,7 @@ const handlers = {};
 handlers.serveLanding = (req, res) => {
   fs.readFile(path.join(__dirname, '..', 'public', 'index.html'), (err, file) => {
     if (err) {
-      handlers.serveNotFound(req,res);
+      handlers.serveNotFound(req, res);
     }
 
     res.writeHead(200, { 'content-type': 'text/html' });
@@ -17,7 +17,7 @@ handlers.serveLanding = (req, res) => {
 
 handlers.getContentType = (url) => {
   const extension = path.extname(url);
-  const extensionType = { 
+  const extensionType = {
     '.css' : 'text/css',
     '.html' : 'text/html',
     '.ico' : 'image/x-ico',
@@ -38,3 +38,11 @@ handlers.serveAssets = (req, res) => {
   });
 };
 
+
+handlers.serveNotFound = (req, res) => {
+  res.writeHead(404, { 'content-type': 'text/html' });
+  res.end('<h1>Page Not Found 😩</h1>');
+};
+
+
+module.exports = handlers;
