@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./assets/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h2> Please choose the type of information you would like to retrieve: </h2>
+
+  <form id="form" name="form" action="/" method="post">
+
+  <select name="recipient" id="recipient" size="1" onChange="chgAction()">
+
+    <option value="best-sellers">Best Sellers</option>
+    <option value="year-sales">Current Year Sales</option>
+    <option value="all-sales">All Sales</option>
+    <option value="top-customers">Top Customers</option>
+    
+  </select>
+
+    <button type="button" name="button">Get info</button>
+
+  </form>
+
+  <div class="results">
+  </div>
+
+<script type="text/javascript" src="./assets/app.js"> </script>
+
+</body>
+</html>
