@@ -1,5 +1,6 @@
 const dbConnection = require(__dirname + '/../database/db_connection');
 
+
 const query = {};
 
 
@@ -31,8 +32,15 @@ query.getQuery = (url) => {
 
 query.getData = (url, handlerCallback) => {
 
- const urlQuery = url.split('/')[2];
-  dbConnection.query(query.getQuery(urlQuery), (err, res) => {
+  const urlQuery = url.split('/')[2];
+  const sqlQuery = query.getQuery(urlQuery);
+
+  if (!sqlQuery) {
+    handlerCallback('Sorry Finn');
+    return;
+  }
+
+  dbConnection.query(sqlQuery, (err, res) => {
     if (err) {
       handlerCallback(err);
     } else {
