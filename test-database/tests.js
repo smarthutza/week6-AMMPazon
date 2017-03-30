@@ -35,16 +35,6 @@ differentQueries.forEach((query,index) => {
   })
 });
 
-tape('Test get Data function', (t) => {
-  queries.getData('/get-data/bestsellers',(err,res) => {
-    console.log('res',res);
-    console.log('err',err);
-
-    t.ok(Array.isArray(res.rows),'expect the response object to have an array containing our results');
-    t.end();
-  });
-});
-
 differentQueries.forEach((query) => {
   tape(`Test ${query} query`, (t) => {
     queries.getData(`/get-data/${query}`,(err,res) => {
