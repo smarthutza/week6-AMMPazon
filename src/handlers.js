@@ -49,6 +49,19 @@ handlers.serveBestsellers = (req, res) => {
 
   query.getBestseller((err, result) => {
     if (err) console.log(err);
+    let data = JSON.stringify(result.rows);
+    res.writeHead(200,{
+      'content-type': 'application/json'
+    });
+    res.end(data);
+  });
+
+};
+
+handlers.serveSalesToDate = (req, res) => {
+
+  query.getAllSales((err, result) => {
+    if (err) console.log(err);
     let data = JSON.stringify(result);
     res.writeHead(200,{
       'content-type': 'application/json'
