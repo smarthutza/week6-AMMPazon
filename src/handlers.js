@@ -47,19 +47,13 @@ handlers.serveNotFound = (req, res) => {
 
 handlers.serveBestsellers = (req, res) => {
 
-  query.getBestseller((err, res) => {
-
-    let data;
-    if(err) {
-      data = err.toString();
-      res.writeHead(500, {"Content-Type": "text/html"});
-    } else {
-      data = JSON.stringify(res);
-      res.writeHead(200, {"Content-Type":"application/json"});
-    }
-    console.log(res);
+  query.getBestseller((err, result) => {
+    if (err) console.log(err);
+    let data = JSON.stringify(result);
+    res.writeHead(200,{
+      'content-type': 'application/json'
+    });
     res.end(data);
-    console.log(res);
   });
 
 };
