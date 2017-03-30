@@ -12,9 +12,9 @@ const router = (req, res) => {
 
     handlers.serveAssets(req, res);
 
-  } else if (endpoint === '/bestsellers') {
+  } else if (endpoint.indexOf('/get-data') === 0) {
 
-    handlers.serveBestsellers(req, res);
+    handlers.serveData(req, res);
 
   } else {
 

@@ -2,7 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const query = require('./database_queries');
 
+
 const handlers = {};
+
 
 handlers.serveLanding = (req, res) => {
   fs.readFile(path.join(__dirname, '..', 'public', 'index.html'), (err, file) => {
@@ -45,32 +47,20 @@ handlers.serveNotFound = (req, res) => {
   res.end('<h1>Page Not Found 😩</h1>');
 };
 
-handlers.serveBestsellers = (req, res) => {
 
-  query.getBestseller((err, result) => {
-    if (err) console.log(err);
-    let data = JSON.stringify(result.rows);
-    res.writeHead(200,{
+handlers.serveData = (req, res) => {
+  query.getData(req.url, (dbError, dbResponse) => {
+    console.log('handler\++++++=======', dbResponse.rows);
+    if (dbError) {
+      handlers.serveNotFound(req, res);
+    }
+
+    res.writeHead(200, {
       'content-type': 'application/json'
     });
-    res.end(data);
+    res.end(JSON.stringify(dbResponse.rows));
   });
-
 };
-
-handlers.serveSalesToDate = (req, res) => {
-
-  query.getAllSales((err, result) => {
-    if (err) console.log(err);
-    let data = JSON.stringify(result);
-    res.writeHead(200,{
-      'content-type': 'application/json'
-    });
-    res.end(data);
-  });
-
-};
-
 
 
 module.exports = handlers;
