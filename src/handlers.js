@@ -1,6 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 
+const query = require('./database_queries');
+
 const handlers = {};
 
 handlers.serveLanding = (req, res) => {

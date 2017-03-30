@@ -11,6 +11,7 @@ const getBestseller = (cb) =>{
 
 module.exports = getBestseller;
 
+
 const getAllSales = (cb) =>{
   dbConnection.query("SELECT SUM(price) AS Sales_To_Date FROM products INNER JOIN basket ON products.id = basket.product_id"
     , (err, res) => {
@@ -20,3 +21,17 @@ const getAllSales = (cb) =>{
 };
 
 module.exports = getAllSales;
+
+
+
+query.getCustomersBySpend = (handlerCallback) => {
+  dbConnection.query('SELECT * FROM customers', (err, res) => {
+    if (err) {
+      handlerCallback(err);
+    } else {
+      handlerCallback(null, res);
+    }
+  });
+};
+
+module.exports = query;
