@@ -44,7 +44,7 @@ function fetch(method, url, cb) {
   };
   
   xhr.onerror = () => {
-    cb(new Error('Database error));
+    cb(new Error('Database error'));
   };
                  
   xhr.open(method, url, true);
