@@ -23,6 +23,4 @@ if (password) { options.password = password; }
 
 options.ssl = (options.host !== 'localhost');
 
-console.log('=========options', options);
-
 module.exports = new Pool(options);

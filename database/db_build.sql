@@ -31,15 +31,15 @@ CREATE TABLE basket (
 
 
 INSERT INTO products(name, price) VALUES
-  ('Rubber Duck', 5),
-  ('Shoe laces', 10),
-  ('Artificial socks', 15)
+  ('Car', 15),
+  ('Motorbike', 10),
+  ('Bicycle', 5)
 RETURNING ID;
 
 INSERT INTO customers(firstname, surname) VALUES
-  ('John', 'Wayne'),
-  ('Cloe', 'Mars'),
-  ('Jack', 'Frost')
+  ('John', 'Bigspender'),
+  ('Cloe', 'Middlespender'),
+  ('Jack', 'Lowspender')
 RETURNING ID;
 
 INSERT INTO orders(date, customer_id) VALUES
@@ -50,7 +50,9 @@ RETURNING ID;
 
 INSERT INTO basket(order_id, product_id) VALUES
   (1, 1),
-  (1, 2)
+  (1, 2),
+  (2, 2),
+  (3, 3)
 RETURNING ID;
 
 COMMIT;
