@@ -10,23 +10,17 @@
 <body>
   <h2> Please choose the type of information you would like to retrieve: </h2>
 
-   <form id="FORM_ID" action="/">
+   <!-- <form id="FORM_ID" action="/"> -->
+     <select id="js-select-analytics">
+       <option value="" disabled selected>Please select</option>
+       <option value="bestsellers">Best Sellers</option>
+       <option value="sales?q=01/01/2017">Current Year Sales</option>
+       <option value="sales?q=all">All Sales</option>
+       <option value="topcust">Top Customers</option>
+     </select>
+   <!-- </form> -->
 
-   <select name="recipient" id="selection" method="POST">
-
-
-     <option value="">Please select</option>
-     <option value="bestsellers">Best Sellers</option>
-     <option value="sales?q=01/01/2017">Current Year Sales</option>
-     <option value="sales?q=all">All Sales</option>
-     <option value="topcust">Top Customers</option>
-
-   </select>
-
-   </form>
-
-   <div class="results">
-   </div>
+   <div class="results"></div>
 
  <script type="text/javascript" src="./assets/app.js"> </script>
 
