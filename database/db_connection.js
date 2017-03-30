@@ -8,6 +8,8 @@ if (process.env.ENV === 'TEST') {
 } else {
   environment('config.env');
 }
+console.log('url', process.env.DB_URL);
+console.log(env, process.env.ENV);
 if (!process.env.DB_URL) {
   throw new Error('Environment variable DB_URL must be set');
 }

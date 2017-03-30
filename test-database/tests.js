@@ -2,18 +2,54 @@ const queries = require('../src/database_queries.js');
 const tape = require('tape');
 const shot = require('shot');
 
-tape('Test get query function', (t) => {
-  const expected = `SELECT products.name, COUNT(basket.product_id) AS times_ordered FROM products
-                       INNER JOIN basket ON products.id = basket.product_id
-                       GROUP BY products.name ORDER BY times_ordered DESC;`;
-  t.equal(expected, queries.getQuery('bestsellers'),'The right query is returned', expected);
-  t.end();
+const sqlQueries = [
+  {  bestsellers:      `select products.name, count(basket.product_id) as times_ordered from products
+    inner join basket on products.id = basket.product_id
+    group by products.name order by times_ordered desc;`,
+
+  },
+  { customersbyspend: `select customers.firstname || ' ' || customers.surname as name, sum(products.price) as total_spend from customers
+    inner join orders on customers.id = orders.customer_id
+    inner join basket on basket.order_id = orders.id
+    inner join products  on products.id = basket.product_id
+    group by customers.firstname, customers.surname;`,
+
+  },
+  { salesthisyear:    `select sum(products.price) as total_sales_this_year from customers
+    inner join orders on customers.id = orders.customer_id
+    inner join basket on basket.order_id = orders.id
+    inner join products on products.id = basket.product_id
+    where orders.date >= '01-01-2017';` },
+  { salestodate:      `select sum(price) as sales_to_date from products
+        inner join basket on products.id = basket.product_id;` }
+];
+
+const differentQueries = ['bestsellers','salestodate','salesthisyear','customersbyspend'];
+
+differentQueries.forEach((query) => {
+  tape('Test get query function', (t) => {
+    t.equal(expected, queries.getQuery(query),`${query}: should return`, expected);
+    t.end();
+  })
 });
 
 tape('Test get Data function', (t) => {
-  queries.getData('/get-data/bestsellers',(res) => {
-    console.log(res);
-   t.ok(typeof res === 'object');
-   t.end();
+  queries.getData('/get-data/bestsellers',(err,res) => {
+    console.log('res',res);
+    console.log('err',err);
+
+    t.ok(Array.isArray(res.rows),'expect the response object to have an array containing our results');
+    t.end();
   });
 });
+
+differentQueries.forEach((query) => {
+  tape(`Test ${query} query`, (t) => {
+    queries.getData(`/get-data/${query}`,(err,res) => {
+      t.ok(Array.isArray(res.rows),`expect the ${query} response object to have an array containing our results`);
+      t.end();
+    });
+  })
+});
+
+
