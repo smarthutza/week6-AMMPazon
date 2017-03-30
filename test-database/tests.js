@@ -26,7 +26,9 @@ const sqlQueries = [
 
 const differentQueries = ['bestsellers','salestodate','salesthisyear','customersbyspend'];
 
-differentQueries.forEach((query) => {
+differentQueries.forEach((query,index) => {
+  // let expected = sqlQueries[i].query;
+  let expected = sqlQueries[index].query;
   tape('Test get query function', (t) => {
     t.equal(expected, queries.getQuery(query),`${query}: should return`, expected);
     t.end();
