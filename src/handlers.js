@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-
 const query = require('./database_queries');
 
 const handlers = {};
@@ -48,16 +47,19 @@ handlers.serveNotFound = (req, res) => {
 
 handlers.serveBestsellers = (req, res) => {
 
-  getBestseller((err, res) => {
+  query.getBestseller((err, res) => {
+
     let data;
     if(err) {
       data = err.toString();
-      response.writeHead(500, {"Content-Type": "text/html"});
+      res.writeHead(500, {"Content-Type": "text/html"});
     } else {
       data = JSON.stringify(res);
-      response.writeHead(200, {"Content-Type":"application/json"});
+      res.writeHead(200, {"Content-Type":"application/json"});
     }
-    response.end(data);
+    console.log(res);
+    res.end(data);
+    console.log(res);
   });
 
 };
