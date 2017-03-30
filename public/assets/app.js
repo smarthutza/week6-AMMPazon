@@ -11,7 +11,7 @@ document.getElementById('js-select-analytics').onchange = function(e) {
 // RENDER
 // **********************************************
 function renderData(err, res) {
-  console.log(res);
+  console.log('=======render', res);
 }
 
 
@@ -23,8 +23,6 @@ function fetch(method, url, cb) {
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
       cb(null, xhr.responseText);
-    } else {
-      cb("error" + xhr.responseType);
     }
   };
   xhr.open(method, url, true);
