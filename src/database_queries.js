@@ -15,8 +15,11 @@ query.getQuery = (url) => {
                        INNER JOIN products  ON products.id = basket.product_id
                        GROUP BY customers.firstname, customers.surname;`,
 
-    salesthisyear:    `SELECT SUM(price) AS Sales_To_Date FROM products
-                       INNER JOIN basket ON products.id = basket.product_id`,
+    salesthisyear:    `SELECT SUM(products.price) as total_sales_this_year FROM customers
+                       INNER JOIN orders ON customers.id = orders.customer_id
+                       INNER JOIN basket ON basket.order_id = orders.id
+                       INNER JOIN products ON products.id = basket.product_id
+                       WHERE orders.date >= '01-01-2017';`,
 
     salestodate:      `SELECT SUM(price) AS Sales_To_Date FROM products
                        INNER JOIN basket ON products.id = basket.product_id;`

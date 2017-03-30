@@ -50,7 +50,6 @@ handlers.serveNotFound = (req, res) => {
 
 handlers.serveData = (req, res) => {
   query.getData(req.url, (dbError, dbResponse) => {
-    console.log('handler\++++++=======', dbResponse.rows);
     if (dbError) {
       handlers.serveNotFound(req, res);
     }
