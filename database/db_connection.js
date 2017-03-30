@@ -1,8 +1,13 @@
 const {Pool} = require('pg');
 const url = require('url');
 
-require('env2')('config.env');
 
+const environment = require('env2');
+if (process.env.ENV === 'TEST') {
+  environment('config-test.env'); 
+} else {
+  environment('config.env');
+}
 if (!process.env.DB_URL) {
   throw new Error('Environment variable DB_URL must be set');
 }

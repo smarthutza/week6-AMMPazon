@@ -1,10 +1,9 @@
-const dbConnection = require('./../database/db_connection');
-
+const dbConnection = require(__dirname + '/../database/db_connection');
 
 const query = {};
 
 
-const getQuery = (url) => {
+query.getQuery = (url) => {
   const queries =  {
     bestsellers:      `SELECT products.name, COUNT(basket.product_id) AS times_ordered FROM products
                        INNER JOIN basket ON products.id = basket.product_id
@@ -29,9 +28,8 @@ const getQuery = (url) => {
 
 query.getData = (url, handlerCallback) => {
 
-  const urlQuery = url.split('/')[2];
-
-  dbConnection.query(getQuery(urlQuery), (err, res) => {
+ const urlQuery = url.split('/')[2];
+  dbConnection.query(query.getQuery(urlQuery), (err, res) => {
     if (err) {
       handlerCallback(err);
     } else {
