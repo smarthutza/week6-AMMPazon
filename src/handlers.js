@@ -44,5 +44,22 @@ handlers.serveNotFound = (req, res) => {
   res.end('<h1>Page Not Found 😩</h1>');
 };
 
+handlers.serveBestsellers = (req, res) => {
+
+  getBestseller((err, res) => {
+    let data;
+    if(err) {
+      data = err.toString();
+      response.writeHead(500, {"Content-Type": "text/html"});
+    } else {
+      data = JSON.stringify(res);
+      response.writeHead(200, {"Content-Type":"application/json"});
+    }
+    response.end(data);
+  });
+
+};
+
+
 
 module.exports = handlers;
