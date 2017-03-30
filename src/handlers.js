@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-
 const query = require('./database_queries');
 
 const handlers = {};
@@ -45,6 +44,33 @@ handlers.serveNotFound = (req, res) => {
   res.writeHead(404, { 'content-type': 'text/html' });
   res.end('<h1>Page Not Found 😩</h1>');
 };
+
+handlers.serveBestsellers = (req, res) => {
+
+  query.getBestseller((err, result) => {
+    if (err) console.log(err);
+    let data = JSON.stringify(result.rows);
+    res.writeHead(200,{
+      'content-type': 'application/json'
+    });
+    res.end(data);
+  });
+
+};
+
+handlers.serveSalesToDate = (req, res) => {
+
+  query.getAllSales((err, result) => {
+    if (err) console.log(err);
+    let data = JSON.stringify(result);
+    res.writeHead(200,{
+      'content-type': 'application/json'
+    });
+    res.end(data);
+  });
+
+};
+
 
 
 module.exports = handlers;
