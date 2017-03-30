@@ -34,6 +34,7 @@ handlers.serveAssets = (req, res) => {
   fs.readFile(path.join(__dirname, '..', 'public', req.url), (err, file) => {
     if (err) {
       handlers.serveNotFound(req,res);
+      return;
     }
 
     res.writeHead(200, { 'content-type': handlers.getContentType(req.url) });
@@ -52,6 +53,7 @@ handlers.serveData = (req, res) => {
   query.getData(req.url, (dbError, dbResponse) => {
     if (dbError) {
       handlers.serveNotFound(req, res);
+      return;
     }
 
     res.writeHead(200, {
