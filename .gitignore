@@ -12,3 +12,4 @@ coverage
 
 config.env
 .env
+config-test.env
