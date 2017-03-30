@@ -10,8 +10,20 @@ document.getElementById('js-select-analytics').onchange = function(e) {
 // **********************************************
 // RENDER
 // **********************************************
-function renderData(err, res) {
-  console.log('=======render', res);
+function renderData(err, results) {
+  if (err) {console.log(err);}
+  const resultsDOM = document.querySelector(".results__list");
+  resultsDOM.innerHTML = "";
+  resultsDOM.innerHTML = results.map(item => {
+    return `
+      <li>
+        ${Object.keys(item).map(key => {
+          return `<span>${item[key]}</span>`;
+        }).join('')}
+      </li>
+    `;
+  }).join('');
+
 }
 
 
@@ -22,7 +34,7 @@ function fetch(method, url, cb) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      cb(null, xhr.responseText);
+      cb(null, JSON.parse(xhr.responseText));
     }
   };
   xhr.open(method, url, true);
