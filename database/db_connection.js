@@ -3,11 +3,13 @@ const url = require('url');
 
 
 const environment = require('env2');
+
 if (process.env.ENV === 'TEST') {
   environment('config-test.env'); 
 } else {
   environment('config.env');
 }
+
 if (!process.env.DB_URL) {
   throw new Error('Environment variable DB_URL must be set');
 }
