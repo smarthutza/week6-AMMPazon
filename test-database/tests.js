@@ -44,4 +44,16 @@ differentQueries.forEach((query) => {
   })
 });
 
+tape(`Test that Sales to Date query returns a string that coerces into a number`, (t) => {
+  queries.getData(`/get-data/salestodate`,(err,res) => {
+    t.ok(Number.isInteger(Number(res.rows[0].sales_to_date)),`expect the Sales to Date query to return string that coerces into a number`);
+    t.end();
+  });
+});
 
+tape(`Test that Sales this Year query returns string that coerces into a number`, (t) => {
+  queries.getData(`/get-data/salesthisyear`,(err,res) => {
+    t.ok(Number.isInteger(Number(res.rows[0].total_sales_this_year)),`expect the Sales this Year query to return string that coerces into a number`);
+    t.end();
+  });
+});
