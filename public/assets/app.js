@@ -22,7 +22,10 @@ function renderData(err, results) {
     return `
       <li class="analytics-item">
         ${Object.keys(item).map(key => {
-          return `<span class="item__span">${key.replace(/_/g,' ').replace(/^[a-z]/gi, match => match.toUpperCase())}: ${item[key]} </span>`;
+          return `<span class="item__span">
+                   <span class="item__key">${key.replace(/_/g,' ').replace(/^[a-z]/gi, match => match.toUpperCase())}:</span>
+                   ${item[key]}
+                 </span>`;
         }).join('')}
       </li>
     `;

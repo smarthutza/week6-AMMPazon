@@ -12,7 +12,7 @@ Specifically his/her
 * Sales to date
 
 We started with our architecture professionally depicted below:
-![Our Initial Architecture](./public/assets/architecture.png)
+![Our Initial Architecture](./demo/architecture.png)
 
 How to run our App
 ===
