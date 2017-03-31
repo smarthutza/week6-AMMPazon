@@ -34,11 +34,11 @@ Running tests on a fake database
 
 In config.env
 ```
-DB_URL=postgres://xzxiwvzc:CCaYHCsgDICj0wftzKisdevDKo9TeW74@stampy.db.elephantsql.com:5432/xzxiwvzc
+DB_URL=postgres://usernameHere:passwordJere@stampy.db.elephantsql.com:5432/dbName
 ```
 In config-test.env
 ```
-DB_URL=postgres://aiwcqzfh:rnqyJg_C69AAK76mTjB_cIwi-MkPPlkq@stampy.db.elephantsql.com:5432/aiwcqzfh
+DB_URL=postgres://otherusername:otherPassword@stampy.db.elephantsql.com:5432/testDatabase
 ```
 * We then set up an `process.env` variable we called `ENV` which we set equal to `TEST`
 * We then check in our build connection file whether this variable exist and set the call to `env2` using this.
