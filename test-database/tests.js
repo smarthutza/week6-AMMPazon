@@ -3,37 +3,43 @@ const tape = require('tape');
 const shot = require('shot');
 
 const sqlQueries = [
-  {  bestsellers:      `select products.name, count(basket.product_id) as times_ordered from products
-    inner join basket on products.id = basket.product_id
-    group by products.name order by times_ordered desc;`,
+  {bestsellers:      `SELECT products.name, COUNT(basket.product_id) AS times_ordered FROM products
+                      INNER JOIN basket ON products.id = basket.product_id
+                      GROUP BY products.name ORDER BY times_ordered DESC;`},
 
-  },
-  { customersbyspend: `select customers.firstname || ' ' || customers.surname as name, sum(products.price) as total_spend from customers
-    inner join orders on customers.id = orders.customer_id
-    inner join basket on basket.order_id = orders.id
-    inner join products  on products.id = basket.product_id
-    group by customers.firstname, customers.surname;`,
+  {customersbyspend: `SELECT customers.firstname || ' ' || customers.surname AS name, SUM(products.price) AS total_spend FROM customers
+                      INNER JOIN orders ON customers.id = orders.customer_id
+                      INNER JOIN basket ON basket.order_id = orders.id
+                      INNER JOIN products  ON products.id = basket.product_id
+                      GROUP BY customers.firstname, customers.surname;`},
 
-  },
-  { salesthisyear:    `select sum(products.price) as total_sales_this_year from customers
-    inner join orders on customers.id = orders.customer_id
-    inner join basket on basket.order_id = orders.id
-    inner join products on products.id = basket.product_id
-    where orders.date >= '01-01-2017';` },
-  { salestodate:      `select sum(price) as sales_to_date from products
-        inner join basket on products.id = basket.product_id;` }
+  {salesthisyear:    `SELECT SUM(products.price) as total_sales_this_year FROM customers
+                      INNER JOIN orders ON customers.id = orders.customer_id
+                      INNER JOIN basket ON basket.order_id = orders.id
+                      INNER JOIN products ON products.id = basket.product_id
+                      WHERE orders.date >= '01-01-2017';`},
+
+  {salestodate:      `SELECT SUM(price) AS Sales_To_Date FROM products
+                      INNER JOIN basket ON products.id = basket.product_id;`}
 ];
 
-const differentQueries = ['bestsellers','salestodate','salesthisyear','customersbyspend'];
 
-differentQueries.forEach((query,index) => {
-  // let expected = sqlQueries[i].query;
-  let expected = sqlQueries[index].query;
+const differentQueries = ['bestsellers', 'customersbyspend','salesthisyear','salestodate'];
+
+
+differentQueries.forEach((query, index) => {
+  let expected = sqlQueries[index][query].replace(/\s+/g, ' ');
+  let actual = queries.getQuery(query).replace(/\s+/g, ' ');
+
   tape('Test get query function', (t) => {
-    t.equal(expected, queries.getQuery(query),`${query}: should return`, expected);
+    t.equal(expected, actual,`${query}: should return`, expected);
     t.end();
-  })
+  });
 });
+
+
+
+
 
 differentQueries.forEach((query) => {
   tape(`Test ${query} query`, (t) => {
@@ -41,8 +47,9 @@ differentQueries.forEach((query) => {
       t.ok(Array.isArray(res.rows),`expect the ${query} response object to have an array containing our results`);
       t.end();
     });
-  })
+  });
 });
+
 
 tape(`Test that Sales to Date query returns a string that coerces into a number`, (t) => {
   queries.getData(`/get-data/salestodate`,(err,res) => {
@@ -50,6 +57,7 @@ tape(`Test that Sales to Date query returns a string that coerces into a number`
     t.end();
   });
 });
+
 
 tape(`Test that Sales this Year query returns string that coerces into a number`, (t) => {
   queries.getData(`/get-data/salesthisyear`,(err,res) => {
