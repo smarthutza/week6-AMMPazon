@@ -1,3 +1,45 @@
+* {
+    margin: 0;
+    padding:0;
+    }
 body {
-  color: green;
+    font-family: 'Roboto', sans-serif;
+    background:hsla(90, 5%, 84%,0.4);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.ammpazon-title {
+    background:#1E3D71;
+    color:white;
+    width: 100%;
+    text-align:center;
+    padding: 2rem 0;
+    margin-bottom:1rem;
+    
+}
+.results__list {
+    width: 80%;
+    padding:0;
+}
+
+.analytics-item {
+    background-color:#015A9E;
+    color:white;
+    padding:1em;
+    min-width: 100%;
+    box-shadow: -1px 1px 3px grey;
+    margin: 0.5em 0;
+    list-style-type: none;
+    display:flex;
+    justify-content:space-between;
+}
+
+.item__span {
+    align-content:center;
+}
+
+#js-select-analytics {
+    font-size: 1.4em;
 }

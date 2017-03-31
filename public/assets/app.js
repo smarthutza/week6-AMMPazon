@@ -20,9 +20,9 @@ function renderData(err, results) {
 
   resultsDOM.innerHTML = results.map(item => {
     return `
-      <li>
+      <li class="analytics-item">
         ${Object.keys(item).map(key => {
-          return `<span>${key}: ${item[key]} </span>`;
+          return `<span class="item__span">${key.replace(/_/g,' ').replace(/^[a-z]/gi, match => match.toUpperCase())}: ${item[key]} </span>`;
         }).join('')}
       </li>
     `;
